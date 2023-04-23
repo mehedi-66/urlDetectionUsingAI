@@ -12,7 +12,11 @@ def Welcome(request):
         return render(request, 'index.html')
 
 def TestUrl(request):
-        return render(request, 'testurl.html')
+        return render(request, 'testurl.html', {'percent': 0})
+
+def About(request):
+    return render(request, 'about.html')
+
 
 
 
@@ -20,9 +24,25 @@ def Url(request):
     url = request.GET['url'] 
     ourl = url
     url = get_prediction_from_url(url)
-    
 
-    return render(request, 'testurl.html', {'url': url, 'ourl': ourl})
+
+    # Pre-define for getting instant percentage to show and littile summery
+
+    allFeatureName = ["Having IP Address", "Abnormal URL", "Count Dot", "Count WWW", "Count atrate", "No Of Dir", "No Of Embed", "Shortening Service", "Count Https", "Count Http", "Count per", "Count Ques", "Count Hyphen", "Count equal", "URL Length", "Hostname Length", "Suspicious Words", "Digit Count", "Letter Count", "fd Length", "tld Length"]
+    # Safe
+    preSafe = [0, 1, 2, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 4, 99, 15, 0, 14, 69, 5, 3]
+    # Defacement
+    preDefacement = [0, 1, 2, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 4, 99, 15, 0, 14, 69, 5, 3]
+    # Phishing
+    prePhishing = [0, 1, 2, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 4, 99, 15, 0, 14, 69, 5, 3]
+    # Malware
+    preMalware = [0, 1, 2, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 4, 99, 15, 0, 14, 69, 5, 3]
+    n = 0
+    # current url status 
+    currentUrlStatus = main(ourl)
+    print(currentUrlStatus)
+
+    return render(request, 'testurl.html', {'url': url, 'ourl': ourl, 'percent': 1, 'allFeatureName': allFeatureName, 'preSafe': preSafe, 'preDefacement': preDefacement, 'prePhishing': prePhishing, 'preMalware': preMalware, 'currentUrlStatus':currentUrlStatus, 'n': n})
 
 
 def get_prediction_from_url(test_url):
@@ -60,7 +80,7 @@ def get_prediction_from_url(test_url):
 def main(url):
     
     status = []
-    
+   
     status.append(having_ip_address(url))
     status.append(abnormal_url(url))
     status.append(count_dot(url))
@@ -88,6 +108,7 @@ def main(url):
       
     status.append(tld_length(tld))
     
+
     
     return status
 
