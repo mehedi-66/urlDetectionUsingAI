@@ -269,9 +269,9 @@
       }
       .percentStyle{
         text-align: center;
-        margin: 20px 45px 0px 0px;
+        margin: 15px 35px 0px 0px;
         font-weight: bold;
-        font-size: 20px;
+        font-size: 17px;
         color: whitesmoke;
         letter-spacing: 1px;
       }
@@ -423,24 +423,32 @@
                 
             </form>
               {% if percent %}
-                  <div class="d-flex justify-content-center">
+                 
+
+                  <div class="d-flex  mt-5" style="margin: 0 40px;">
+
+                    <div id="chartContainer" style="height: 200px; width: 470px;"></div>
+       
+                  </div>
+                  <div class="d-flex" style="margin: 0px 0px 0px 96px;">
                     <div class="percentStyle">
-                      <p>85%</p>
+                      <p>{{percent.0}}%</p>
                       <p>Safe</p>
                     </div>
                     <div class="percentStyle">
-                      <p>25%</p>
+                      <p>{{percent.1}}%</p>
                       <p>Defacement</p>
                     </div>
                     <div class="percentStyle">
-                      <p>35%</p>
+                      <p>{{percent.2}}%</p>
                       <p>Phishing</p>
                     </div>
                     <div class="percentStyle">
-                      <p>55%</p>
+                      <p>{{percent.3}}%</p>
                       <p>Malware</p>
-                    </div>
+                    </div> 
                   </div>
+                  
                {% endif %}
                   <p class="d-flex justify-content-center text-white" style="font-size: 18px;">{{url}}</p>
             <div class="d-flex justify-content-center mt-5 ">
@@ -481,7 +489,7 @@
               </div>
                 
                 <div class="d-flex justify-content-center">
-                  <p style="color: whitesmoke; font-size: 17px;">85%</p>
+                  <p style="color: whitesmoke; font-size: 17px;">{{percent.0}}%</p>
                 </div>
 
                 <hr style="background-color: whitesmoke;"/>
@@ -512,7 +520,7 @@
                 </div>
                   
                   <div class="d-flex justify-content-center">
-                    <p style="color: whitesmoke; font-size: 17px;">25%</p>
+                    <p style="color: whitesmoke; font-size: 17px;">{{percent.1}}%</p>
                   </div>
                   
 
@@ -544,7 +552,7 @@
                   </div>
                     
                     <div class="d-flex justify-content-center">
-                      <p style="color: whitesmoke; font-size: 17px;">35%</p>
+                      <p style="color: whitesmoke; font-size: 17px;">{{percent.2}}%</p>
                     </div>
 
 
@@ -576,7 +584,7 @@
                     </div>
                       
                       <div class="d-flex justify-content-center">
-                        <p style="color: whitesmoke; font-size: 17px;">55%</p>
+                        <p style="color: whitesmoke; font-size: 17px;">{{percent.3}}%</p>
                       </div>
             </div>
         </div>
@@ -687,9 +695,9 @@
     <script>
       var feature = {{allFeatureName|safe}};
       var preSafe = {{preSafe|safe}};
-      var preDefacement = {{preDefacement}};
-      var prePhishing = {{prePhishing}};
-      var preMalware = {{preMalware}};
+      var preDefacement = {{preDefacement|safe}};
+      var prePhishing = {{prePhishing|safe}};
+      var preMalware = {{preMalware|safe}};
       var current = {{currentUrlStatus|safe}};
       
       function createTableRows(feature, current, whichType, tableNo) {
@@ -712,11 +720,54 @@
 
       // table1 safe
       createTableRows(feature, current, preSafe, "table1");
-      createTableRows(feature, current, preSafe, "table2");
+      createTableRows(feature, current, preDefacement, "table2");
       createTableRows(feature, current, prePhishing, "table3");
       createTableRows(feature, current, preMalware, "table4");
 
     
     </script>
+
+    <!-- Chart show  -->
+    <script>
+
+      var typeOfURL = `{{url}}`;
+      var saf = `{{percent.0}}`;
+      var def = `{{percent.1}}`;
+      var phi = `{{percent.2}}`;
+      var mal = `{{percent.3}}`;
+
+      window.onload = function () {
+      
+      var chart = new CanvasJS.Chart("chartContainer", {
+      animationEnabled: true,
+      theme: "light1", // "light1", "light2", "dark1", "dark2"
+      title: {
+        text: typeOfURL
+      },
+      axisY: {
+        // title: "How close (in %)",
+        suffix: "%"
+      },
+      axisX: {
+        // title: ""
+      },
+      data: [{
+        type: "column",
+        // yValueFormatString: "#,##0.0#\"%\"",
+        dataPoints: [
+          { label: "", y: +saf },	
+          { label: "", y: +def },	
+          { label: "", y: +phi },
+          { label: "", y: +mal },	
+        
+        ]
+      }]
+    });
+    chart.render();
+      
+      }
+      </script>
+
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   </body>
 </html>
