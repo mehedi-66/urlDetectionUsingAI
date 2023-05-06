@@ -325,6 +325,82 @@
         })(w, d, "zarazData", "script");
       })(window, document);
     </script>
+
+
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+  }
+  
+  
+  html {
+    box-sizing: border-box;
+  }
+  
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+  
+  .column {
+    float: left;
+    width: 33.3%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+  }
+  
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 8px;
+  }
+  
+  .about-section {
+    padding: 10px;
+    text-align: center;
+    background-color: #474e5d;
+    color: white;
+  }
+  
+  .container {
+    padding: 0 16px;
+  }
+  
+  .container::after, .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .title {
+    color: grey;
+  }
+  
+  .button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .button:hover {
+    background-color: #555;
+  }
+  img {
+    border-radius: 50%;
+  }
+  
+  @media screen and (max-width: 650px) {
+    .column {
+      width: 100%;
+      display: block;
+    }
+  }
+  </style>
   </head>
 
   <body>
@@ -357,6 +433,9 @@
             <li>
               <a href="/about">About Us</a>
             </li>
+            <li>
+              <a href="/summary">Summary Video</a>
+            </li>
           
            
           </ul>
@@ -381,24 +460,49 @@
         </div>
       </nav>
 
-      <div id="content" class="p-4 p-md-5 pt-5">
+      <div id="content" class="">
         <!-- Top Bar Header  -->
-        <div class="topBarHeader">
-            <h2>About Us</h2>
+        <div class="about-section">
+          <h1 style="color: #efefef;">About Us</h1>
+          
         </div>
-        <div class="contentPart">
-            <div class="topPartContent">
-
-            <div class="lowerPartContent d-flex flex-row justify-content-center mb-5 mt-5">
-                <div class="flex-fill" >
-                    <img style="width: 95%; height: 90%;" src="{% static 'img/1.jpg' %}" />
-                </div>
-                <div class="flex-fill" >
-                    <img style="width: 95%; height: 90%;" src="{% static 'img/2.png' %}" />
-                </div>
+        
+        <h3 style="text-align:center; margin: 0px;">Our Team</h3>
+        <div class="row p-3">
+          <div class="column">
+            <div class="card">
+              <img src="/static/img/Sir.jpg" alt="Avatar" style="width: 170px; margin: 8px 0px 0px 20px;">
+              <div class="container">
+                <h2>Krishna Das</h2>
+                <h6 class="title">Supervisor</h6>
+                <p>Assistant Professor <br />
+                 MSc in Enterprise Software Engg (UK) <br/>
+                 BCS (Pune, India),Professional <br/>
+                 Diploma in Business Management & Marketing (London,UK) <br/>
+                 krishna.das@iubat.edu</p>
+                <p><button class="button">Contact</button></p>
+              </div>
             </div>
-           
+          </div>
+          
+        
+          <div class="column">
+            <div class="card">
+              <img src="/static/img/Mehedi Hasan.jpg" alt="Avatar" style="width: 170px; margin: 8px 0px 0px 20px;">
+              <div class="container">
+                <h2>Mehedi Hasan</h2>
+                <p class="title">Student</p>
+                <p>ID: 19303001</p>
+                <p>mehedi04725466@gmail.com</p>
+                <p><button class="button">Contact</button></p>
+              </div>
+            </div>
+          </div>
+          
+          
         </div>
+
+        
 
 
        

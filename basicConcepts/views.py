@@ -21,6 +21,9 @@ def TestUrl(request):
 def About(request):
     return render(request, 'about.html')
 
+def Summary(request):
+    return render(request, 'summary.html')
+
 
 # Get Percentage calculation using desision model 
 
